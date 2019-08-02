@@ -1,0 +1,1354 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{investigate-a-dataset-zh-Copy1}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \hypertarget{ux9879ux76eeux63a2ux7d22ux6570ux636eux96c6-gapminder-world}{%
+\section{项目：探索数据集-Gapminder
+World}\label{ux9879ux76eeux63a2ux7d22ux6570ux636eux96c6-gapminder-world}}
+
+\hypertarget{ux76eeux5f55}{%
+\subsection{目录}\label{ux76eeux5f55}}
+
+简介
+
+数据整理
+
+探索性数据分析
+
+结论
+
+ \#\# 简介
+
+\begin{quote}
+Gapminder是一个非营利性组织，其建立旨在了解各个地区与国家在社会、经济和环境发展的统计数据与其他信息。通过使用Gapminder进行数据探索，可以有效地展示国家之间的发展差距。\\
+在本项目中，将使用Gapminder的数据，探索中国的GDP增长率、城市化发展程度、就业率、农业就业人口比例、教育程度之间是否存在相关性。
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{c+c1}{\PYZsh{}导入语句}
+        \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{pandas} \PY{k}{as} \PY{n+nn}{pd} 
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        
+        \PY{c+c1}{\PYZsh{}加载数据}
+        \PY{c+c1}{\PYZsh{}gpd年度总增长率}
+        \PY{n}{gdp\PYZus{}year} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gdp\PYZus{}total\PYZus{}yearly\PYZus{}growth.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}人均国内生产总值（以美元为单位，通货膨胀调整后）}
+        \PY{n}{gdp\PYZus{}per\PYZus{}cap} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gdppercapita\PYZus{}us\PYZus{}inflation\PYZus{}adjusted.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}农业就业者占总就业人口比例}
+        \PY{n}{agri\PYZus{}total\PYZus{}per} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{agriculture\PYZus{}workers\PYZus{}percent\PYZus{}of\PYZus{}employment.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}女性农业就业者占总女性就业人口比例}
+        \PY{n}{female\PYZus{}agri\PYZus{}per} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{female\PYZus{}agriculture\PYZus{}workers\PYZus{}percent\PYZus{}of\PYZus{}female\PYZus{}employment.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}男性农业就业者占总女性就业人口比例}
+        \PY{n}{male\PYZus{}agri\PYZus{}per} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{male\PYZus{}agriculture\PYZus{}workers\PYZus{}percent\PYZus{}of\PYZus{}male\PYZus{}employment.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}城镇人口占总人口百分比}
+        \PY{n}{urban\PYZus{}p\PYZus{}total\PYZus{}per} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{urban\PYZus{}population\PYZus{}percent\PYZus{}of\PYZus{}total.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{c+c1}{\PYZsh{}成人（15周岁以上含15周岁）识字率}
+        \PY{n}{literacy\PYZus{}adult\PYZus{}per} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{read\PYZus{}csv}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{literacy\PYZus{}rate\PYZus{}adult\PYZus{}total\PYZus{}percent\PYZus{}of\PYZus{}people\PYZus{}ages\PYZus{}15\PYZus{}and\PYZus{}above.csv}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+     \#\# 数据整理
+
+\hypertarget{ux5408ux5e76ux6570ux636eux96c6}{%
+\subsubsection{合并数据集}\label{ux5408ux5e76ux6570ux636eux96c6}}
+
+\begin{quote}
+由于分析的主体是中国，需要先提取各个数据集中列为China的行，并为每个数据集添加一列type对数据进行备注
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{k}{def} \PY{n+nf}{set\PYZus{}df\PYZus{}type}\PY{p}{(}\PY{n}{df}\PY{p}{,}\PY{n}{type\PYZus{}value}\PY{p}{)}\PY{p}{:}
+            \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{query}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country == }\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{China}\PY{l+s+s1}{\PYZdq{}}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+            \PY{n}{df}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{n}{type\PYZus{}value}
+            \PY{n}{df} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{set\PYZus{}index}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{type}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+            \PY{k}{return} \PY{n}{df}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{gdp\PYZus{}year} \PY{o}{=} \PY{n}{set\PYZus{}df\PYZus{}type}\PY{p}{(}\PY{n}{gdp\PYZus{}year}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gdp\PYZus{}year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{gdp\PYZus{}per\PYZus{}cap} \PY{o}{=} \PY{n}{set\PYZus{}df\PYZus{}type}\PY{p}{(}\PY{n}{gdp\PYZus{}per\PYZus{}cap}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gdp\PYZus{}per\PYZus{}cap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{agri\PYZus{}total\PYZus{}per} \PY{o}{=} \PY{n}{set\PYZus{}df\PYZus{}type}\PY{p}{(}\PY{n}{agri\PYZus{}total\PYZus{}per}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{agri\PYZus{}total\PYZus{}per}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{female\PYZus{}agri\PYZus{}per} \PY{o}{=} \PY{n}{set\PYZus{}df\PYZus{}type}\PY{p}{(}\PY{n}{female\PYZus{}agri\PYZus{}per}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{female\PYZus{}agri\PYZus{}per}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{male\PYZus{}agri\PYZus{}per} \PY{o}{=} \PY{n}{set\PYZus{}df\PYZus{}type}\PY{p}{(}\PY{n}{male\PYZus{}agri\PYZus{}per}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{male\PYZus{}agri\PYZus{}per}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{urban\PYZus{}p\PYZus{}total\PYZus{}per} \PY{o}{=} \PY{n}{set\PYZus{}df\PYZus{}type}\PY{p}{(}\PY{n}{urban\PYZus{}p\PYZus{}total\PYZus{}per}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{urban\PYZus{}p\PYZus{}total\PYZus{}per}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{literacy\PYZus{}adult\PYZus{}per} \PY{o}{=} \PY{n}{set\PYZus{}df\PYZus{}type}\PY{p}{(}\PY{n}{literacy\PYZus{}adult\PYZus{}per}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{literacy\PYZus{}adult\PYZus{}per}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+D:\textbackslash{}Anaconda3\textbackslash{}lib\textbackslash{}site-packages\textbackslash{}ipykernel\_launcher.py:5: SettingWithCopyWarning: 
+A value is trying to be set on a copy of a slice from a DataFrame.
+Try using .loc[row\_indexer,col\_indexer] = value instead
+
+See the caveats in the documentation: http://pandas.pydata.org/pandas-docs/stable/indexing.html\#indexing-view-versus-copy
+  """
+
+    \end{Verbatim}
+
+    \hypertarget{ux5e38ux89c4ux5c5eux6027}{%
+\subsubsection{常规属性}\label{ux5e38ux89c4ux5c5eux6027}}
+
+    \begin{quote}
+在这一部分，将会查看整理后的各个数据集的数据类型是否正确，并检查每个数据集的年份是否一致。
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{n}{gdp\PYZus{}year}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+Index: 1 entries, gdp\_year to gdp\_year
+Columns: 214 entries, country to 2013
+dtypes: float64(213), object(1)
+memory usage: 1.7+ KB
+
+    \end{Verbatim}
+
+    \begin{quote}
+GPD年度总增长率的数据描述，共有214列，从country列到2013列，其中country列数据类型为object，其他列数据类型为浮点数
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{n}{gdp\PYZus{}year}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}5}]:}          country   1801   1802   1803   1804   1805   1806   1807   1808  \textbackslash{}
+        type                                                                       
+        gdp\_year   China  0.837  0.837  0.837  0.837  0.837  0.837  0.837  0.837   
+        
+                   1809  {\ldots}  2004  2005  2006  2007  2008  2009  2010  2011  2012  \textbackslash{}
+        type             {\ldots}                                                         
+        gdp\_year  0.837  {\ldots}  10.2  10.1  12.4  11.2   2.2   7.5  7.34  5.56   7.6   
+        
+                  2013  
+        type            
+        gdp\_year   7.6  
+        
+        [1 rows x 214 columns]
+\end{Verbatim}
+            
+    \begin{quote}
+查看GDP年度总增长率的数据，可见数据从1801年开始，到2013年结束
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{gdp\PYZus{}per\PYZus{}cap}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+Index: 1 entries, gdp\_per\_cap to gdp\_per\_cap
+Data columns (total 59 columns):
+country    1 non-null object
+1960       1 non-null float64
+1961       1 non-null float64
+1962       1 non-null float64
+1963       1 non-null float64
+1964       1 non-null float64
+1965       1 non-null float64
+1966       1 non-null float64
+1967       1 non-null float64
+1968       1 non-null float64
+1969       1 non-null float64
+1970       1 non-null float64
+1971       1 non-null float64
+1972       1 non-null float64
+1973       1 non-null float64
+1974       1 non-null float64
+1975       1 non-null float64
+1976       1 non-null float64
+1977       1 non-null float64
+1978       1 non-null float64
+1979       1 non-null float64
+1980       1 non-null float64
+1981       1 non-null float64
+1982       1 non-null float64
+1983       1 non-null float64
+1984       1 non-null float64
+1985       1 non-null float64
+1986       1 non-null float64
+1987       1 non-null float64
+1988       1 non-null float64
+1989       1 non-null float64
+1990       1 non-null float64
+1991       1 non-null float64
+1992       1 non-null float64
+1993       1 non-null float64
+1994       1 non-null float64
+1995       1 non-null float64
+1996       1 non-null float64
+1997       1 non-null float64
+1998       1 non-null float64
+1999       1 non-null float64
+2000       1 non-null float64
+2001       1 non-null float64
+2002       1 non-null float64
+2003       1 non-null float64
+2004       1 non-null float64
+2005       1 non-null float64
+2006       1 non-null float64
+2007       1 non-null float64
+2008       1 non-null float64
+2009       1 non-null float64
+2010       1 non-null int64
+2011       1 non-null float64
+2012       1 non-null float64
+2013       1 non-null float64
+2014       1 non-null float64
+2015       1 non-null float64
+2016       1 non-null float64
+2017       1 non-null float64
+dtypes: float64(57), int64(1), object(1)
+memory usage: 480.0+ bytes
+
+    \end{Verbatim}
+
+    \begin{quote}
+人均国内生产总值的数据描述，共有59列，从country列到2017列，其中country列数据类型为object，2010列为整数，其他列数据类型为浮点数
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{n}{gdp\PYZus{}per\PYZus{}cap}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}7}]:}             country   1960   1961   1962   1963   1964   1965   1966   1967  \textbackslash{}
+        type                                                                          
+        gdp\_per\_cap   China  192.0  141.0  132.0  142.0  164.0  187.0  202.0  185.0   
+        
+                      1968  {\ldots}    2008    2009  2010    2011    2012    2013    2014  \textbackslash{}
+        type                {\ldots}                                                         
+        gdp\_per\_cap  173.0  {\ldots}  3810.0  4140.0  4560  4970.0  5340.0  5720.0  6110.0   
+        
+                       2015    2016    2017  
+        type                                 
+        gdp\_per\_cap  6500.0  6890.0  7330.0  
+        
+        [1 rows x 59 columns]
+\end{Verbatim}
+            
+    \begin{quote}
+查看人均国内生产总值的数据，可见数据从1960年开始，至2017年结束
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{n}{agri\PYZus{}total\PYZus{}per}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+Index: 1 entries, agri\_total\_per to agri\_total\_per
+Data columns (total 49 columns):
+country    1 non-null object
+1970       1 non-null float64
+1971       0 non-null float64
+1972       0 non-null float64
+1973       0 non-null float64
+1974       0 non-null float64
+1975       1 non-null float64
+1976       0 non-null float64
+1977       0 non-null float64
+1978       1 non-null float64
+1979       1 non-null float64
+1980       1 non-null float64
+1981       1 non-null float64
+1982       1 non-null float64
+1983       1 non-null float64
+1984       1 non-null float64
+1985       1 non-null float64
+1986       1 non-null float64
+1987       1 non-null float64
+1988       1 non-null float64
+1989       1 non-null float64
+1990       1 non-null float64
+1991       1 non-null float64
+1992       1 non-null float64
+1993       1 non-null float64
+1994       1 non-null float64
+1995       1 non-null float64
+1996       1 non-null float64
+1997       1 non-null float64
+1998       1 non-null float64
+1999       1 non-null float64
+2000       1 non-null float64
+2001       1 non-null float64
+2002       1 non-null float64
+2003       1 non-null float64
+2004       1 non-null float64
+2005       1 non-null float64
+2006       1 non-null float64
+2007       1 non-null float64
+2008       1 non-null float64
+2009       1 non-null float64
+2010       1 non-null float64
+2011       1 non-null float64
+2012       1 non-null float64
+2013       1 non-null float64
+2014       1 non-null float64
+2015       1 non-null float64
+2016       1 non-null float64
+2017       1 non-null float64
+dtypes: float64(48), object(1)
+memory usage: 400.0+ bytes
+
+    \end{Verbatim}
+
+    \begin{quote}
+农业就业者占人口比例的数据描述，共有49列，从country列到2017列，其中country列数据类型为object，其他列数据类型为浮点数
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{agri\PYZus{}total\PYZus{}per}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}9}]:}                country  1970  1971  1972  1973  1974  1975  1976  1977  1978  \textbackslash{}
+        type                                                                           
+        agri\_total\_per   China  80.8   NaN   NaN   NaN   NaN  77.2   NaN   NaN  70.5   
+        
+                        {\ldots}  2008  2009  2010  2011  2012  2013  2014  2015  2016  \textbackslash{}
+        type            {\ldots}                                                         
+        agri\_total\_per  {\ldots}  39.6  38.1  36.7  34.8  33.6  31.4  29.5  28.3  27.7   
+        
+                        2017  
+        type                  
+        agri\_total\_per  27.0  
+        
+        [1 rows x 49 columns]
+\end{Verbatim}
+            
+    \begin{quote}
+查看农业就业者占总人口比例数据，可见数据从1970年开始，至2017年结束
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{female\PYZus{}agri\PYZus{}per}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+Index: 1 entries, female\_agri\_per to female\_agri\_per
+Data columns (total 33 columns):
+country    1 non-null object
+1991       1 non-null float64
+1992       1 non-null float64
+1993       1 non-null float64
+1994       1 non-null float64
+1995       1 non-null float64
+1996       1 non-null float64
+1997       1 non-null float64
+1998       1 non-null float64
+1999       1 non-null float64
+2000       1 non-null float64
+2001       1 non-null float64
+2002       1 non-null float64
+2003       1 non-null float64
+2004       1 non-null float64
+2005       1 non-null float64
+2006       1 non-null float64
+2007       1 non-null float64
+2008       1 non-null float64
+2009       1 non-null float64
+2010       1 non-null float64
+2011       1 non-null float64
+2012       1 non-null float64
+2013       1 non-null float64
+2014       1 non-null float64
+2015       1 non-null float64
+2016       1 non-null float64
+2017       1 non-null float64
+2018       1 non-null float64
+2019       1 non-null float64
+2020       1 non-null float64
+2021       1 non-null float64
+2022       1 non-null float64
+dtypes: float64(32), object(1)
+memory usage: 272.0+ bytes
+
+    \end{Verbatim}
+
+    \begin{quote}
+女性农业就业者占总女性就业人口比例的数据描述，共有33列，从country列到2022列，其中country列数据类型为object，其他列数据类型为浮点数
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}11}]:} \PY{n}{female\PYZus{}agri\PYZus{}per}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}11}]:}                 country  1991  1992  1993  1994  1995  1996  1997  1998  1999  \textbackslash{}
+         type                                                                            
+         female\_agri\_per   China  56.3  55.0  53.1  52.5  51.7  50.8  49.9  49.5  48.5   
+         
+                          {\ldots}  2013  2014  2015  2016  2017  2018  2019  2020  2021  \textbackslash{}
+         type             {\ldots}                                                         
+         female\_agri\_per  {\ldots}  25.4  24.1  22.8  21.4  20.5  19.3  18.2  17.1  16.2   
+         
+                          2022  
+         type                   
+         female\_agri\_per  15.2  
+         
+         [1 rows x 33 columns]
+\end{Verbatim}
+            
+    \begin{quote}
+查看女性农业就业者占总女性就业人口比例的数据，可见数据从1991年开始，到2022年结束\\
+数据源显示，2018年以后数据均为预测
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}12}]:} \PY{n}{male\PYZus{}agri\PYZus{}per}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+Index: 1 entries, male\_agri\_per to male\_agri\_per
+Data columns (total 33 columns):
+country    1 non-null object
+1991       1 non-null float64
+1992       1 non-null float64
+1993       1 non-null float64
+1994       1 non-null float64
+1995       1 non-null float64
+1996       1 non-null float64
+1997       1 non-null float64
+1998       1 non-null float64
+1999       1 non-null float64
+2000       1 non-null float64
+2001       1 non-null float64
+2002       1 non-null float64
+2003       1 non-null float64
+2004       1 non-null float64
+2005       1 non-null float64
+2006       1 non-null float64
+2007       1 non-null float64
+2008       1 non-null float64
+2009       1 non-null float64
+2010       1 non-null float64
+2011       1 non-null float64
+2012       1 non-null float64
+2013       1 non-null float64
+2014       1 non-null float64
+2015       1 non-null float64
+2016       1 non-null float64
+2017       1 non-null float64
+2018       1 non-null float64
+2019       1 non-null float64
+2020       1 non-null float64
+2021       1 non-null float64
+2022       1 non-null float64
+dtypes: float64(32), object(1)
+memory usage: 272.0+ bytes
+
+    \end{Verbatim}
+
+    \begin{quote}
+男性农业就业者占总男性就业人口比例的数据描述，共有33列，从country列到2022列，其中country列数据类型为object，其他列数据类型为浮点数
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}13}]:} \PY{n}{male\PYZus{}agri\PYZus{}per}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}13}]:}               country  1991  1992  1993  1994  1995  1996  1997  1998  1999  \textbackslash{}
+         type                                                                          
+         male\_agri\_per   China  54.5  52.6  50.3  48.9  47.6  46.3  44.9  43.9  42.6   
+         
+                        {\ldots}  2013  2014  2015  2016  2017  2018  2019  2020  2021  2022  
+         type           {\ldots}                                                              
+         male\_agri\_per  {\ldots}  19.2  18.1  17.0  15.9  15.2  14.3  13.4  12.7  11.9  11.3  
+         
+         [1 rows x 33 columns]
+\end{Verbatim}
+            
+    \begin{quote}
+查看男性农业就业者占总男性就业人口比例的数据，可见数据从1991年开始，到2022年结束\\
+数据源显示，2018年以后数据均为预测
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}14}]:} \PY{n}{urban\PYZus{}p\PYZus{}total\PYZus{}per}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+Index: 1 entries, urban\_p\_total\_per to urban\_p\_total\_per
+Data columns (total 59 columns):
+country    1 non-null object
+1960       1 non-null float64
+1961       1 non-null float64
+1962       1 non-null float64
+1963       1 non-null float64
+1964       1 non-null float64
+1965       1 non-null float64
+1966       1 non-null float64
+1967       1 non-null float64
+1968       1 non-null float64
+1969       1 non-null float64
+1970       1 non-null float64
+1971       1 non-null float64
+1972       1 non-null float64
+1973       1 non-null float64
+1974       1 non-null float64
+1975       1 non-null float64
+1976       1 non-null float64
+1977       1 non-null float64
+1978       1 non-null float64
+1979       1 non-null float64
+1980       1 non-null float64
+1981       1 non-null float64
+1982       1 non-null float64
+1983       1 non-null float64
+1984       1 non-null float64
+1985       1 non-null float64
+1986       1 non-null float64
+1987       1 non-null float64
+1988       1 non-null float64
+1989       1 non-null float64
+1990       1 non-null float64
+1991       1 non-null float64
+1992       1 non-null float64
+1993       1 non-null float64
+1994       1 non-null float64
+1995       1 non-null float64
+1996       1 non-null float64
+1997       1 non-null float64
+1998       1 non-null float64
+1999       1 non-null float64
+2000       1 non-null float64
+2001       1 non-null float64
+2002       1 non-null float64
+2003       1 non-null float64
+2004       1 non-null float64
+2005       1 non-null float64
+2006       1 non-null float64
+2007       1 non-null float64
+2008       1 non-null float64
+2009       1 non-null float64
+2010       1 non-null float64
+2011       1 non-null float64
+2012       1 non-null float64
+2013       1 non-null float64
+2014       1 non-null float64
+2015       1 non-null float64
+2016       1 non-null float64
+2017       1 non-null float64
+dtypes: float64(58), object(1)
+memory usage: 480.0+ bytes
+
+    \end{Verbatim}
+
+    \begin{quote}
+城镇人口占总人口比例的数据描述，共有59列，从country列到2017列，其中country列数据类型为object，其他列数据类型为浮点数
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}15}]:} \PY{n}{urban\PYZus{}p\PYZus{}total\PYZus{}per}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}15}]:}                   country  1960  1961  1962  1963  1964  1965  1966  1967  \textbackslash{}
+         type                                                                        
+         urban\_p\_total\_per   China  16.2  16.7  17.2  17.8  18.3  18.1  17.9  17.8   
+         
+                            1968  {\ldots}  2008  2009  2010  2011  2012  2013  2014  2015  \textbackslash{}
+         type                     {\ldots}                                                   
+         urban\_p\_total\_per  17.7  {\ldots}  46.5  47.9  49.2  50.5  51.8  53.0  54.3  55.5   
+         
+                            2016  2017  
+         type                           
+         urban\_p\_total\_per  56.7  58.0  
+         
+         [1 rows x 59 columns]
+\end{Verbatim}
+            
+    \begin{quote}
+城镇人口占总人口比例的数据，可见数据从1960年开始，到2017年结束
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}16}]:} \PY{n}{literacy\PYZus{}adult\PYZus{}per}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+Index: 1 entries, literacy\_adult\_per to literacy\_adult\_per
+Data columns (total 38 columns):
+country    1 non-null object
+1975       0 non-null float64
+1976       0 non-null float64
+1977       0 non-null float64
+1978       0 non-null float64
+1979       0 non-null float64
+1980       0 non-null float64
+1981       0 non-null float64
+1982       1 non-null float64
+1983       0 non-null float64
+1984       0 non-null float64
+1985       0 non-null float64
+1986       0 non-null float64
+1987       0 non-null float64
+1988       0 non-null float64
+1989       0 non-null float64
+1990       1 non-null float64
+1991       0 non-null float64
+1992       0 non-null float64
+1993       0 non-null float64
+1994       0 non-null float64
+1995       0 non-null float64
+1996       0 non-null float64
+1997       0 non-null float64
+1998       0 non-null float64
+1999       0 non-null float64
+2000       1 non-null float64
+2001       0 non-null float64
+2002       0 non-null float64
+2003       0 non-null float64
+2004       0 non-null float64
+2005       0 non-null float64
+2006       0 non-null float64
+2007       0 non-null float64
+2008       0 non-null float64
+2009       0 non-null float64
+2010       1 non-null float64
+2011       0 non-null float64
+dtypes: float64(37), object(1)
+memory usage: 312.0+ bytes
+
+    \end{Verbatim}
+
+    \begin{quote}
+成人（15周岁以上，含15周岁）识字率的数据描述，共有38列，从country列到2011列，其中country列数据类型为object，其他列数据类型为浮点数
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}17}]:} \PY{n}{literacy\PYZus{}adult\PYZus{}per}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}17}]:}                    country  1975  1976  1977  1978  1979  1980  1981  1982  \textbackslash{}
+         type                                                                         
+         literacy\_adult\_per   China   NaN   NaN   NaN   NaN   NaN   NaN   NaN  65.5   
+         
+                             1983  {\ldots}  2002  2003  2004  2005  2006  2007  2008  2009  \textbackslash{}
+         type                      {\ldots}                                                   
+         literacy\_adult\_per   NaN  {\ldots}   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   
+         
+                             2010  2011  
+         type                            
+         literacy\_adult\_per  95.1   NaN  
+         
+         [1 rows x 38 columns]
+\end{Verbatim}
+            
+    \begin{quote}
+成人（15周岁以上，含15周岁）识字率的数据，可见数据从1982年开始，到2011年结束\\
+其中，除1982年外，该数据集每10年统计一次数据
+\end{quote}
+
+    \begin{quote}
+上述分析总结如下：
+\end{quote}
+
+\begin{longtable}[]{@{}llll@{}}
+\toprule
+数据集名称 & 起始年份 & 结束年份 & 数据描述\tabularnewline
+\midrule
+\endhead
+gdp\_year & 1801 & 2013 & GDP年度总增长率\tabularnewline
+gdp\_per\_cap & 1960 & 2017 & 人均国内生产总值\tabularnewline
+agri\_total\_per & 1970 & 2017 & 农业就业者占总人口比例\tabularnewline
+female\_agri\_per & 1991 & 2022 &
+女性农业就业者占女性总人口比例\tabularnewline
+male\_agri\_per & 1991 & 2022 &
+男性农业就业者占男性总人口比例\tabularnewline
+urban\_p\_total\_per & 1960 & 2017 & 城镇人口占总人口比例\tabularnewline
+literacy\_adult\_per & 1982 & 2011 &
+成人识字率（15周岁以上，含15周岁\tabularnewline
+\bottomrule
+\end{longtable}
+
+    \hypertarget{ux6570ux636eux6e05ux7406}{%
+\subsubsection{数据清理}\label{ux6570ux636eux6e05ux7406}}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}18}]:} \PY{k}{def} \PY{n+nf}{data\PYZus{}clean}\PY{p}{(}\PY{n}{df}\PY{p}{)}\PY{p}{:}
+             \PY{n}{df\PYZus{}nan} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{any}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+             \PY{n}{df\PYZus{}dup} \PY{o}{=} \PY{n}{df}\PY{o}{.}\PY{n}{duplicated}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{sum}\PY{p}{(}\PY{p}{)}
+             \PY{k}{return} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{该数据集共有缺失值}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{，重复值}\PY{l+s+si}{\PYZob{}\PYZcb{}}\PY{l+s+s1}{。}\PY{l+s+s1}{\PYZsq{}}\PY{o}{.}\PY{n}{format}\PY{p}{(}\PY{n}{df\PYZus{}nan}\PY{p}{,} \PY{n}{df\PYZus{}dup}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}19}]:} \PY{n}{data\PYZus{}clean}\PY{p}{(}\PY{n}{gdp\PYZus{}year}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}19}]:} '该数据集共有缺失值0，重复值0。'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}20}]:} \PY{n}{data\PYZus{}clean}\PY{p}{(}\PY{n}{gdp\PYZus{}per\PYZus{}cap}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}20}]:} '该数据集共有缺失值0，重复值0。'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}21}]:} \PY{n}{data\PYZus{}clean}\PY{p}{(}\PY{n}{agri\PYZus{}total\PYZus{}per}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}21}]:} '该数据集共有缺失值6，重复值0。'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}22}]:} \PY{n}{data\PYZus{}clean}\PY{p}{(}\PY{n}{female\PYZus{}agri\PYZus{}per}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}22}]:} '该数据集共有缺失值0，重复值0。'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}23}]:} \PY{n}{data\PYZus{}clean}\PY{p}{(}\PY{n}{male\PYZus{}agri\PYZus{}per}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}23}]:} '该数据集共有缺失值0，重复值0。'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}24}]:} \PY{n}{data\PYZus{}clean}\PY{p}{(}\PY{n}{urban\PYZus{}p\PYZus{}total\PYZus{}per}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}24}]:} '该数据集共有缺失值0，重复值0。'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}25}]:} \PY{n}{data\PYZus{}clean}\PY{p}{(}\PY{n}{literacy\PYZus{}adult\PYZus{}per}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}25}]:} '该数据集共有缺失值33，重复值0。'
+\end{Verbatim}
+            
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}26}]:} \PY{n}{agri\PYZus{}total\PYZus{}per}\PY{o}{.}\PY{n}{isnull}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}26}]:}                 country   1970  1971  1972  1973  1974   1975  1976  1977  \textbackslash{}
+         type                                                                        
+         agri\_total\_per    False  False  True  True  True  True  False  True  True   
+         
+                          1978  {\ldots}   2008   2009   2010   2011   2012   2013   2014  \textbackslash{}
+         type                   {\ldots}                                                    
+         agri\_total\_per  False  {\ldots}  False  False  False  False  False  False  False   
+         
+                          2015   2016   2017  
+         type                                 
+         agri\_total\_per  False  False  False  
+         
+         [1 rows x 49 columns]
+\end{Verbatim}
+            
+    \begin{quote}
+从上述结果得出，仅agri\_total\_per和literacy\_adult\_per存在缺失值，所有数据集都不存在重复值。\\
+在1.3.2中，我们得知literacy\_adule\_per仅5个列存在对应的值，分别是country(object)，1982(float)，1990(float)，2000(float)，2010(float)，因此缺失值33基于该数据集10年统计一次的特征，是正常现象。\\
+agri\_total\_per中出现缺失值的年份分别是1971年-1974年，1976年和1977年。\\
+由于缺失值距离数据起始点较近，且该年份受政治事件及自然灾害影响较大，因此建议不清洗数据，并将1978年设为起始点。
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}27}]:} \PY{c+c1}{\PYZsh{}使用drop函数，删除1977以前的列}
+         \PY{n}{agri\PYZus{}total\PYZus{}per}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1970}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1971}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1972}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1973}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1974}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1975}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1976}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1977}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{axis}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}28}]:} \PY{c+c1}{\PYZsh{}检查agri\PYZus{}agri\PYZus{}total\PYZus{}per的缺失值与重复值}
+         \PY{n}{data\PYZus{}clean}\PY{p}{(}\PY{n}{agri\PYZus{}total\PYZus{}per}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}28}]:} '该数据集共有缺失值0，重复值0。'
+\end{Verbatim}
+            
+     \#\# 探索性数据分析
+
+\hypertarget{ux95eeux98981gdpux5e74ux5ea6ux603bux589eux957fux4e0eux4ebaux5747ux56fdux5185ux751fux4ea7ux603bux503cux662fux5426ux5448ux6b63ux76f8ux5173ux4e0eux6b64ux540cux65f6ux6210ux4ebaux8bc6ux5b57ux7387ux4ea7ux751fux4e86ux600eux6837ux7684ux53d8ux5316}{%
+\subsubsection{问题1：GDP年度总增长与人均国内生产总值是否呈正相关，与此同时，成人识字率产生了怎样的变化？}\label{ux95eeux98981gdpux5e74ux5ea6ux603bux589eux957fux4e0eux4ebaux5747ux56fdux5185ux751fux4ea7ux603bux503cux662fux5426ux5448ux6b63ux76f8ux5173ux4e0eux6b64ux540cux65f6ux6210ux4ebaux8bc6ux5b57ux7387ux4ea7ux751fux4e86ux600eux6837ux7684ux53d8ux5316}}
+
+    \begin{quote}
+合并数据集
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}29}]:} \PY{n}{data\PYZus{}all} \PY{o}{=} \PY{n}{data\PYZus{}all} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{concat}\PY{p}{(}\PY{p}{[}\PY{n}{gdp\PYZus{}year}\PY{p}{,} \PY{n}{gdp\PYZus{}per\PYZus{}cap}\PY{p}{,} \PY{n}{agri\PYZus{}total\PYZus{}per}\PY{p}{,} 
+                    \PY{n}{female\PYZus{}agri\PYZus{}per}\PY{p}{,} \PY{n}{male\PYZus{}agri\PYZus{}per}\PY{p}{,} \PY{n}{urban\PYZus{}p\PYZus{}total\PYZus{}per}\PY{p}{,}
+                   \PY{n}{literacy\PYZus{}adult\PYZus{}per}\PY{p}{]}\PY{p}{,} \PY{n}{sort}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}30}]:} \PY{n}{data\PYZus{}all}\PY{o}{.}\PY{n}{drop}\PY{p}{(}\PY{n}{columns}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{country}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{inplace}\PY{o}{=}\PY{k+kc}{True}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}31}]:} \PY{n}{data\PYZus{}all}\PY{o}{.}\PY{n}{info}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+<class 'pandas.core.frame.DataFrame'>
+Index: 7 entries, gdp\_year to literacy\_adult\_per
+Columns: 222 entries, 1801 to 2022
+dtypes: float64(222)
+memory usage: 12.2+ KB
+
+    \end{Verbatim}
+
+    \begin{quote}
+提取三个数据``年份''对应的数据
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}32}]:} \PY{n}{gdp\PYZus{}year\PYZus{}data} \PY{o}{=} \PY{n}{data\PYZus{}all}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}
+         \PY{n}{gdp\PYZus{}per\PYZus{}cap\PYZus{}data} \PY{o}{=} \PY{n}{data\PYZus{}all}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]}
+         \PY{n}{literacy\PYZus{}adult\PYZus{}per\PYZus{}data} \PY{o}{=} \PY{n}{data\PYZus{}all}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{1}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}33}]:} \PY{n}{df1} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gdp\PYZus{}year}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{gdp\PYZus{}year\PYZus{}data}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gdp\PYZus{}per\PYZus{}cap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{gdp\PYZus{}per\PYZus{}cap\PYZus{}data}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{literacy\PYZus{}adult\PYZus{}per}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{literacy\PYZus{}adult\PYZus{}per\PYZus{}data}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}34}]:} \PY{n}{df1}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{line}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Comparation of GDP year growth, GDP per capita and literacy rates(adults)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Data}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}34}]:} Text(0, 0.5, 'Data')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_57_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{quote}
+由于数据单位不一致，数值范围也各不相同，因此，想要探究GDP年度总增长与人均国内生产总值是否呈正相关，需要单独查看各个图表
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}35}]:} \PY{n}{gdp\PYZus{}year\PYZus{}data}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{line}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP year growth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Percents}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}35}]:} Text(0, 0.5, 'Percents')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_59_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{quote}
+自1801年到2013年，GDP年度总增长变化如上。\\
+由于人均国内生产总值的数据范围是1960年-2017年，为方便对比，将GDP年度总增长数据调整为以1960年为起始点。
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}36}]:} \PY{n}{gdp\PYZus{}year\PYZus{}data} \PY{o}{=} \PY{n}{gdp\PYZus{}year\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1960}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2022}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{gdp\PYZus{}year\PYZus{}data}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{line}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP year growth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Percents}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}36}]:} Text(0, 0.5, 'Percents')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_61_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{quote}
+从上述图标中可见，GDP年度总增长变化浮动较大，下面使用移动平均数来查看总体趋势。\\
+如下图，粒度选择10，可见自1960年后，GDP年度总增长趋势为整体上升。
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}37}]:} \PY{n}{gdp\PYZus{}year\PYZus{}data\PYZus{}mean\PYZus{}10} \PY{o}{=}\PY{n}{gdp\PYZus{}year\PYZus{}data}\PY{o}{.}\PY{n}{rolling}\PY{p}{(}\PY{n}{window}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{p}{)}
+         \PY{n}{gdp\PYZus{}year\PYZus{}data\PYZus{}mean\PYZus{}10}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{line}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP year growth}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Percents}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}37}]:} Text(0, 0.5, 'Percents')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_63_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}38}]:} \PY{n}{gdp\PYZus{}per\PYZus{}cap\PYZus{}data} \PY{o}{=} \PY{n}{gdp\PYZus{}per\PYZus{}cap\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1960}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2022}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{gdp\PYZus{}per\PYZus{}cap\PYZus{}data}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{line}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{GDP per capita}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Dollars}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}38}]:} Text(0, 0.5, 'Dollars')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_64_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{quote}
+如上图所示，人均国内生产总值变化趋势为整体上升
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}39}]:} \PY{n}{literacy\PYZus{}adult\PYZus{}per\PYZus{}data} \PY{o}{=} \PY{n}{literacy\PYZus{}adult\PYZus{}per\PYZus{}data}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1982}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2022}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{literacy\PYZus{}adult\PYZus{}per\PYZus{}data}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bar}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Literacy rates(adult)}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{figsize} \PY{o}{=}\PY{p}{(}\PY{l+m+mi}{10}\PY{p}{,}\PY{l+m+mi}{3}\PY{p}{)}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Percent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}39}]:} Text(0, 0.5, 'Percent')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_66_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{quote}
+自1982年起，根据数据显示（每10年统计一次），成人识字率也呈上升趋势。
+\end{quote}
+
+    \hypertarget{ux95eeux98982ux57ceux9547ux4ebaux53e3ux5360ux603bux4ebaux53e3ux6bd4ux4f8bux53d8ux5316ux5982ux4f55ux519cux4e1aux5c31ux4e1aux4ebaux53e3ux6bd4ux4f8bux662fux5426ux4e0eux57ceux9547ux4ebaux53e3ux53d8ux5316ux5448ux76f8ux5173ux5173ux7cfbux4e8eux6b64ux540cux65f6ux7537ux6027ux519cux4e1aux5c31ux4e1aux4ebaux53e3ux548cux5973ux6027ux519cux4e1aux5c31ux4e1aux4ebaux53e3ux53c8ux4ea7ux751fux4e86ux600eux6837ux7684ux53d8ux5316}{%
+\subsubsection{问题2：城镇人口占总人口比例变化如何？农业就业人口比例是否与城镇人口变化呈相关关系？于此同时，男性农业就业人口和女性农业就业人口又产生了怎样的变化？}\label{ux95eeux98982ux57ceux9547ux4ebaux53e3ux5360ux603bux4ebaux53e3ux6bd4ux4f8bux53d8ux5316ux5982ux4f55ux519cux4e1aux5c31ux4e1aux4ebaux53e3ux6bd4ux4f8bux662fux5426ux4e0eux57ceux9547ux4ebaux53e3ux53d8ux5316ux5448ux76f8ux5173ux5173ux7cfbux4e8eux6b64ux540cux65f6ux7537ux6027ux519cux4e1aux5c31ux4e1aux4ebaux53e3ux548cux5973ux6027ux519cux4e1aux5c31ux4e1aux4ebaux53e3ux53c8ux4ea7ux751fux4e86ux600eux6837ux7684ux53d8ux5316}}
+
+    \begin{quote}
+提取四个数据``年份''对应的数据
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}40}]:} \PY{n}{urban\PYZus{}p\PYZus{}total\PYZus{}per\PYZus{}data} \PY{o}{=} \PY{n}{data\PYZus{}all}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{o}{\PYZhy{}}\PY{l+m+mi}{2}\PY{p}{]}
+         \PY{n}{agri\PYZus{}total\PYZus{}per\PYZus{}data} \PY{o}{=} \PY{n}{data\PYZus{}all}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{2}\PY{p}{]}
+         \PY{n}{female\PYZus{}agri\PYZus{}per\PYZus{}data} \PY{o}{=} \PY{n}{data\PYZus{}all}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{3}\PY{p}{]}
+         \PY{n}{male\PYZus{}agri\PYZus{}per\PYZus{}data} \PY{o}{=} \PY{n}{data\PYZus{}all}\PY{o}{.}\PY{n}{iloc}\PY{p}{[}\PY{l+m+mi}{4}\PY{p}{]}
+\end{Verbatim}
+
+
+    \begin{quote}
+合并数据集
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}41}]:} \PY{n}{df2} \PY{o}{=} \PY{n}{pd}\PY{o}{.}\PY{n}{DataFrame}\PY{p}{(}\PY{p}{\PYZob{}}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{urban\PYZus{}p\PYZus{}total\PYZus{}per}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{urban\PYZus{}p\PYZus{}total\PYZus{}per\PYZus{}data}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{agri\PYZus{}total\PYZus{}per}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{agri\PYZus{}total\PYZus{}per\PYZus{}data}\PY{p}{,}
+                           \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{female\PYZus{}agri\PYZus{}per}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{female\PYZus{}agri\PYZus{}per\PYZus{}data}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{male\PYZus{}agri\PYZus{}per}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{n}{male\PYZus{}agri\PYZus{}per\PYZus{}data}\PY{p}{\PYZcb{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{quote}
+由于四个数据集起始点最早于1960年，且四个数据集的数据单位都为百分比（\%），接下来只需对df2的年份进行处理，即可通过直接对比得出结果
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}59}]:} \PY{n}{df2} \PY{o}{=} \PY{n}{df2}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1950}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{2030}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+         \PY{n}{df2}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{line}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Comparation of Urban population percentage, agriculture workers percentage, female and male agricultrue worker percentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Percent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}59}]:} Text(0, 0.5, 'Percent')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_74_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}65}]:} \PY{n}{urban\PYZus{}p\PYZus{}total\PYZus{}per\PYZus{}data}\PY{o}{.}\PY{n}{loc}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1963}\PY{l+s+s1}{\PYZsq{}}\PY{p}{:} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{1980}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{kind}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{line}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,}\PY{n}{title}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Urban polulation total percentage}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{;}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Years}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+         \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Percent}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}65}]:} Text(0, 0.5, 'Percent')
+\end{Verbatim}
+            
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_75_1.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+     \#\# 结论 \#\#\#
+问题1：GDP年度总增长与人均国内生产总值是否呈正相关，与此同时，成人识字率产生了怎样的变化？
+\textgreater{}\textbf{回答}：从上面分析中，可以得出GDP年度总增长与人口国内生产总值整体都是整体上升，但GDP年度总增长波动较大，二者并非严格的正相关关系。\\
+与此同时，在1982年-2010年的将近30年终，成人识字率也得到了显著提高（虽然数据源仅又5个值，也即每10年记录一次）。
+
+\hypertarget{ux95eeux98982ux57ceux9547ux4ebaux53e3ux5360ux603bux4ebaux53e3ux6bd4ux4f8bux53d8ux5316ux5982ux4f55ux519cux4e1aux5c31ux4e1aux4ebaux53e3ux6bd4ux4f8bux662fux5426ux4e0eux57ceux9547ux4ebaux53e3ux53d8ux5316ux5448ux76f8ux5173ux5173ux7cfbux4e0eux6b64ux540cux65f6ux7537ux6027ux519cux4e1aux5c31ux4e1aux4ebaux53e3ux548cux5973ux6027ux519cux4e1aux5c31ux4e1aux4ebaux53e3ux53c8ux4ea7ux751fux4e86ux600eux6837ux7684ux53d8ux5316}{%
+\subsubsection{问题2：城镇人口占总人口比例变化如何？农业就业人口比例是否与城镇人口变化呈相关关系？与此同时，男性农业就业人口和女性农业就业人口又产生了怎样的变化？}\label{ux95eeux98982ux57ceux9547ux4ebaux53e3ux5360ux603bux4ebaux53e3ux6bd4ux4f8bux53d8ux5316ux5982ux4f55ux519cux4e1aux5c31ux4e1aux4ebaux53e3ux6bd4ux4f8bux662fux5426ux4e0eux57ceux9547ux4ebaux53e3ux53d8ux5316ux5448ux76f8ux5173ux5173ux7cfbux4e0eux6b64ux540cux65f6ux7537ux6027ux519cux4e1aux5c31ux4e1aux4ebaux53e3ux548cux5973ux6027ux519cux4e1aux5c31ux4e1aux4ebaux53e3ux53c8ux4ea7ux751fux4e86ux600eux6837ux7684ux53d8ux5316}}
+
+\begin{quote}
+\textbf{回答}：城镇人口占总人口比例整体上升，但1963年至1972年呈现明显下降，随后又稳步上升；从整体上看，农业就业人口比例与城镇人口比例呈负相关关系，但在1980，1990，2000年，农业就业人口也出现过短暂的上升；自1990年起，随着城镇人口的上升，男性农业就业人口及女性农业就业人口出现了显著下降。
+\end{quote}
+
+\begin{quote}
+由于能力所限，本报告伴随着一定的局限性。
+\end{quote}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}69}]:} \PY{k+kn}{from} \PY{n+nn}{subprocess} \PY{k}{import} \PY{n}{call}
+         \PY{n}{call}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{python}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}m}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nbconvert}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Investigate\PYZus{}a\PYZus{}Dataset.ipynb}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{)}
+\end{Verbatim}
+
+
+\begin{Verbatim}[commandchars=\\\{\}]
+{\color{outcolor}Out[{\color{outcolor}69}]:} 4294967295
+\end{Verbatim}
+            
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
